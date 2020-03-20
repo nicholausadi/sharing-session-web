@@ -1,0 +1,21 @@
+steps:
+# Install dependencies
+- name: node
+  entrypoint: npm
+  args: ['install']
+
+# Unit Test
+- name: node
+  entrypoint: npm
+  args: ['test']
+
+# Build project
+- name: node
+  entrypoint: npm
+  args: ['run', 'build']
+
+# Deploy to GAE
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'app.yaml', '--project=sharing-session-web', '--quiet']
+
+timeout: '1600s'
